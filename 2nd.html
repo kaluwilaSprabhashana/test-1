@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Details - Rent a Camera</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .product-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: border-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .thumbnail:hover {
+            border-color: #3498db;
+        }
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stars {
+            color: #f39c12;
+            font-size: 1.2rem;
+        }
+
+        .price-section {
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 0.5rem;
+        }
+
+        .rental-options {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .option-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .option-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .add-to-cart {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #229954;
+        }
+
+        .specifications {
+            margin-top: 1rem;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .spec-label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .spec-card {
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+            border-left: 4px solid #3498db;
+        }
+
+        .spec-card h4 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-section {
+                grid-template-columns: 1fr;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">📷 Rent a Camera</div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="#cameras">Cameras</a>
+                <a href="#cart">Cart</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / <span>Canon EOS R6</span>
+        </div>
+
+        <div class="product-section">
+            <div class="product-images">
+                <div class="main-image">📷</div>
+                <div class="thumbnail-container">
+                    <div class="thumbnail">📷</div>
+                    <div class="thumbnail">📷</div>
+                    <div class="thumbnail">📷</div>
+                    <div class="thumbnail">📷</div>
+                </div>
+            </div>
+
+            <div class="product-details">
+                <h1 class="product-title">Canon EOS R6</h1>
+                
+                <div class="rating">
+                    <span class="stars">★★★★★</span>
+                    <span>(128 reviews)</span>
+                </div>
+
+                <div class="price-section">
+                    <div class="price">$89.99 / day</div>
+                    <p>High-end full-frame mirrorless camera perfect for professional photography</p>
+                </div>
+
+                <div>
+                    <label><strong>Select Rental Period:</strong></label>
+                    <div class="rental-options">
+                        <button class="option-btn active">1 Day</button>
+                        <button class="option-btn">3 Days</button>
+                        <button class="option-btn">1 Week</button>
+                        <button class="option-btn">1 Month</button>
+                    </div>
+                </div>
+
+                <button class="add-to-cart">Add to Cart</button>
+
+                <div class="specifications">
+                    <h3>Quick Specs</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Megapixels:</span>
+                        <span>20.1 MP</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Sensor:</span>
+                        <span>Full Frame CMOS</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Video:</span>
+                        <span>4K UHD 60fps</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">ISO Range:</span>
+                        <span>100-102400</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="specs-grid">
+            <div class="spec-card">
+                <h4>📸 Key Features</h4>
+                <p>Professional-grade autofocus system with 1053 AF points, weather-sealed magnesium body, and advanced image stabilization.</p>
+            </div>
+            <div class="spec-card">
+                <h4>🎥 Video Capabilities</h4>
+                <p>Record in 4K at up to 60fps, includes full-frame crop support, and advanced video autofocus for professional videography.</p>
+            </div>
+            <div class="spec-card">
+                <h4>🔋 Battery Life</h4>
+                <p>Approximately 340 shots per full battery charge. Rental includes 2 extra batteries and USB-C fast charger.</p>
+            </div>
+            <div class="spec-card">
+                <h4>📦 What's Included</h4>
+                <p>Camera body, 2 batteries, USB-C charger, camera strap, and protective carrying case for safe transport.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Rent a Camera. All rights reserved.</p>
+    </footer>
+</body>
+</html>
